@@ -59,19 +59,19 @@ export default  async function signup(req,res){
                        }
                    });
 
-                   readHTMLFile('../public/emailTemplate.html',function (err,html){
-                       let template = handlebars.compile(html);
-                       let replacements = {
-                           link:`http://${req.headers.host}/Confirmation?email=${req.body.email}&hash=${email}`
-                       }
-                       let htmlToSend = template(replacements);
+                   // readHTMLFile('../public/emailTemplate.html',function (err,html){
+                   //     let template = handlebars.compile(html);
+                   //     let replacements = {
+                   //         link:`http://${req.headers.host}/Confirmation?email=${req.body.email}&hash=${email}`
+                   //     }
+                   //     let htmlToSend = template(replacements);
 
                        let mailOptions = {
                            from: 'no-reply@example.com',
                            to: req.body.email,
                            subject: 'Account Verification Link',
-                           html:htmlToSend
-                           // text: 'Hello ' + req.body.firstName + ',\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/Confirmation?email=' + req.body.email + '&hash=' + email + '\n\nThank You!\n',
+                           // html:htmlToSend
+                           text: 'Hello ' + req.body.firstName + ',\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/Confirmation?email=' + req.body.email + '&hash=' + email + '\n\nThank You!\n',
                        };
                        transporter.sendMail(mailOptions, function (err) {
                            if (err) {
@@ -87,7 +87,7 @@ export default  async function signup(req,res){
                            res.json({message: 'A verification email has been sent to ' + req.body.email + '. It will be expire after one day.'});
                        })
 
-                   })
+                   // })
 
                }).catch(e => res.status(401).json({error: true, message: "Seems like user all ready exists"}))
 
