@@ -76,7 +76,7 @@ export default function SignIn() {
                         validationSchema={SignInSchema}
                         onSubmit={(values,...other)=>{
                             if(values){
-                                axios.post(`/api/login/`,{
+                                axios.post(`api/login/`,{
                                     email:values.email,
                                     password:values.password
                                     },
