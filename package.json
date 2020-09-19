@@ -1,0 +1,49 @@
+{
+  "name": "next-mongo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@syncfusion/ej2-react-charts": "^18.2.56",
+    "array-move": "^3.0.1",
+    "axios": "^0.20.0",
+    "bcrypt": "^5.0.0",
+    "chartify": "^3.6.0",
+    "cookie": "^0.4.1",
+    "cookie-cutter": "^0.2.0",
+    "formik": "^2.1.5",
+    "formik-material-ui": "^3.0.0-alpha.0",
+    "handlebars": "^4.7.6",
+    "isomorphic-unfetch": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.2",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-sequence": "^5.2.2",
+    "next": "9.5.2",
+    "next-cookies": "^2.0.3",
+    "nextjs-progressbar": "0.0.6",
+    "nodemailer": "^6.4.11",
+    "notistack": "^1.0.0",
+    "nprogress": "^0.2.0",
+    "react": "16.13.1",
+    "react-beforeunload": "^2.2.4",
+    "react-cookie": "^4.0.3",
+    "react-dom": "16.13.1",
+    "react-sortable-hoc": "^1.11.0",
+    "react-sortablejs": "^2.0.11",
+    "react-swipe-to-delete-ios": "^1.0.8",
+    "react-trend": "^1.2.5",
+    "yup": "^0.29.3"
+  },
+  "devDependencies": {
+    "@types/node": "^14.6.4",
+    "typescript": "^4.0.2"
+  }
+}
