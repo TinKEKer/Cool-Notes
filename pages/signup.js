@@ -69,7 +69,7 @@ export default function SignUp() {
                 onSubmit={(values,...other)=>{
                 if(values){
                    console.log(values)
-                    axios.post(`/api/auth/signup`,{
+                    axios.post(`https://cool-notes.vercel.app/api/auth/signup`,{
                             email:values.email,
                             password:values.password,
                             firstName:values.firstName,
