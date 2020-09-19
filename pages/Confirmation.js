@@ -74,7 +74,7 @@ Confirmation.getInitialProps = async ctx =>{
 
 
 
-   const data = await myGet(`http://localhost:3000/api/auth/confirmation?email=${cookieEmail}&hash=${hash}`,ctx)
+   const data = await myGet(`/api/auth/confirmation?email=${cookieEmail}&hash=${hash}`,ctx)
 
     return{
         info:data
