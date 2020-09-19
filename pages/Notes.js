@@ -28,7 +28,7 @@ export  default  function Notes ({notes}){
     useEffect(() => {
         async function fetchData() {
             const email = state.email!==undefined&&state.email!==''?state.email:localStorage.getItem('email')
-        axios.get(`http://localhost:3000/api/notes?email=${email}`).then(data=>{
+        axios.get(`/api/notes?email=${email}`).then(data=>{
             setNote(data.data.data)
             router.events.on('routeChangeStart', ()=>setUpdate(true))
             return ()=>{
@@ -99,12 +99,12 @@ const setToUpdate = (data,oldData)=>{
 
 
         const updateBeforeUnload =  ()=>{
-            axios.put('http://localhost:3000/api/notes',note)
+            axios.put('/api/notes',note)
         }
 
 
    const handleDelete = itemToDelete => {
-       axios.delete(`http://localhost:3000/api/notes/${itemToDelete._id}`
+       axios.delete(`/api/notes/${itemToDelete._id}`
        ).then(data=>{
            enqueueSnackbar('Note Deleted',{
                variant:'error'

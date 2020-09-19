@@ -14,7 +14,7 @@ export default function Profile({data}){
     const [state,dispatch] = useContext(Context)
 
     useEffect(()=>{
-        axios.get(`http://localhost:3000/api/user?email=${localStorage.getItem('email')}`).then(data=>{
+        axios.get(`/api/user?email=${localStorage.getItem('email')}`).then(data=>{
             setUser(data.data)
         })
     },[state.darkMode])
@@ -34,7 +34,7 @@ Profile.getInitialProps = async (ctx) => {
     ctx.query={
         email: cookieEmail===''?localStorage.getItem('email'):cookieEmail
     }
-    const json = await myGet(`http://localhost:3000/api/user?email=${ctx.query.email}`,ctx);
+    const json = await myGet(`/api/user?email=${ctx.query.email}`,ctx);
 
     return{
         data:json

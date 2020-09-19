@@ -69,7 +69,7 @@ export default function SignUp() {
                 onSubmit={(values,...other)=>{
                 if(values){
                    console.log(values)
-                    axios.post(`http://localhost:3000/api/auth/signup`,{
+                    axios.post(`/api/auth/signup`,{
                             email:values.email,
                             password:values.password,
                             firstName:values.firstName,

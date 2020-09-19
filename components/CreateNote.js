@@ -46,7 +46,7 @@ export default function NoteField() {
                 validationSchema={CreateNoteSchema}
                 onSubmit={(values,...other)=>{
                     if(values){
-                        axios.post(`http://localhost:3000/api/notes/`,{
+                        axios.post(`/api/notes/`,{
                                 title:values.title,
                                 description:values.description,
                                 createdBy:values.createdBy
