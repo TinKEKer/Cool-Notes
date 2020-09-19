@@ -46,7 +46,7 @@ export default function NoteField() {
                 validationSchema={CreateNoteSchema}
                 onSubmit={(values,...other)=>{
                     if(values){
-                        axios.post(`/api/notes/`,{
+                        axios.post(`https://cool-notes.vercel.app/api/notes/`,{
                                 title:values.title,
                                 description:values.description,
                                 createdBy:values.createdBy

@@ -121,7 +121,7 @@ export default function NavBar(props) {
     };
 
     const updateMode = ()=>{
-        axios.post('/api/user',{
+        axios.post('https://cool-notes.vercel.app/api/user',{
             email:state.email,
             mode:state.darkMode
         }).then(data=>{
@@ -136,7 +136,7 @@ export default function NavBar(props) {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const logOut =  ()=>{
-         axios.get('/api/logout').then(data=>{
+         axios.get('https://cool-notes.vercel.app/api/logout').then(data=>{
              localStorage.clear()
              enqueueSnackbar(data.data.message,{
                  variant:'error'

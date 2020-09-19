@@ -74,7 +74,7 @@ Confirmation.getInitialProps = async ctx =>{
 
 
 
-   const data = await myGet(`/api/auth/confirmation?email=${cookieEmail}&hash=${hash}`,ctx)
+   const data = await myGet(`https://cool-notes.vercel.app/api/auth/confirmation?email=${cookieEmail}&hash=${hash}`,ctx)
 
     return{
         info:data
