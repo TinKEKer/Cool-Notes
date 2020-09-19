@@ -59,7 +59,7 @@ export default  async function signup(req,res){
                        }
                    });
 
-                   readHTMLFile('./emailTemplate.html',function (err,html){
+                   readHTMLFile('../public/emailTemplate.html',function (err,html){
                        let template = handlebars.compile(html);
                        let replacements = {
                            link:`http://${req.headers.host}/Confirmation?email=${req.body.email}&hash=${email}`
