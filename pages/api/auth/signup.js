@@ -71,7 +71,7 @@ export default  async function signup(req,res){
                            to: req.body.email,
                            subject: 'Account Verification Link',
                            // html:htmlToSend
-                           text: 'Hello ' + req.body.firstName + ',\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/Confirmation?email=' + req.body.email + '&hash=' + email + '\n\nThank You!\n',
+                           text: 'Hello ' + req.body.firstName + ',\n\n' + 'Please verify your account by clicking the link: \nhttps:\/\/' + req.headers.host + '\/Confirmation?email=' + req.body.email + '&hash=' + email + '\n\nThank You!\n',
                        };
                        transporter.sendMail(mailOptions, function (err) {
                            if (err) {
