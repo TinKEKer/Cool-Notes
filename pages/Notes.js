@@ -119,7 +119,7 @@ const setToUpdate = (data,oldData)=>{
 
     const SortableItem = sortableElement(({value}) =>
         <div>
-        <SwipeToDelete onDelete={()=>handleDelete(value)}  height={220} deleteWidth={75}>
+        <SwipeToDelete onDelete={()=>handleDelete(value)}  height={210} deleteWidth={75}>
         <NoteCard data={value} open={open} setOpen={setOpen} setEdit={setEdit} setLiked={setLiked} updateNote={setNote}/>
         </SwipeToDelete>
         </div>
