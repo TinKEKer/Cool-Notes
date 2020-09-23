@@ -7,6 +7,20 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import * as Yup from "yup";
 import {Field, Form, Formik} from "formik";
 import {TextField} from 'formik-material-ui'
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import useTheme from "@material-ui/core/styles/useTheme";
+import {makeStyles} from "@material-ui/core/styles";
+import {red} from "@material-ui/core/colors";
+
+
+
+const useStyles = makeStyles((theme) => ({
+    dialogSize:{
+        width:'60vw',
+        maxWidth:'600px'
+    }
+}));
+
 
 
 export default function FormDialog(props) {
@@ -16,9 +30,10 @@ export default function FormDialog(props) {
         description:Yup.string().required('Description is required')
     })
 
+  const classes = useStyles()
 
     return (
-        <Dialog open={props.open} onClose={props.close} >
+        <Dialog open={props.open} onClose={props.close}   >
             <Formik initialValues={{
                 title:props.data.title,
                 description:props.data.description
@@ -35,6 +50,7 @@ export default function FormDialog(props) {
             >
                 {({errors,touched,isValid,dirty})=>(
                     <Form>
+                        <div className={classes.dialogSize}>
                 <DialogTitle id="form-dialog-title">
                     <Field
                         variant="outlined"
@@ -67,9 +83,11 @@ export default function FormDialog(props) {
                         Cancel
                     </Button>
                 </DialogActions>
+                        </div>
                     </Form>
                     )}
                     </Formik>
+
             </Dialog>
 
     );

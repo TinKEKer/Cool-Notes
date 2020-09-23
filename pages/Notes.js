@@ -18,15 +18,12 @@ import {red} from "@material-ui/core/colors";
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        overflow:'hidden',
 
-    },
     helper:{
-        minWidth:'60%',
-        maxWidth:'100%',
-        overflow:'hidden',
-        marginBottom:'-5px'
+        height:'100%',
+        width:'100%',
+        display: "inline-block"
+
     }
 }));
 
@@ -140,29 +137,19 @@ const setToUpdate = (data,oldData)=>{
     const [edit,setEdit] = useState(undefined)
 
     const SortableItem = sortableElement(({value}) =>
-
-           <Grid item xs={12} className={classes.helper}>
+        <div className={classes.helper}>
             <SwipeToDelete onDelete={()=>handleDelete(value)}  height={250}  deleteWidth={75} >
         <NoteCard data={value} open={open} setOpen={setOpen} setEdit={setEdit} setLiked={setLiked} updateNote={setNote}/>
         </SwipeToDelete>
-           </Grid>
+        </div>
 
     )
     const SortableList = SortableContainer(({items}) => {
         return (
             <ul>
-                <Grid
-                    container
-                    spacing={6}
-                    direction={"column"}
-                    alignItems={"center"}
-                    justify={"center"}
-                       className={classes.root}
-                >
                 {items.map((value, index) => (
                     <SortableItem value={value} key={value._id} index={index}  key={value._id} id={'item'} />
                 ))}
-                </Grid>
             </ul>
         );
     });
@@ -174,7 +161,7 @@ const setToUpdate = (data,oldData)=>{
                 :<Skeleton height={280}/>}
             {edit!==undefined?<FormDialog open={open} close={() => {
                 setOpen(false)
-            }} data={edit} setToUpdate={setToUpdate}/>:null}
+            }} data={edit} setToUpdate={setToUpdate} />:null}
         </>
     )
 }
