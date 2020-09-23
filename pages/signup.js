@@ -15,6 +15,7 @@ import  axios from 'axios'
 import React from "react";
 import {useSnackbar} from "notistack";
 import {useRouter} from "next/router";
+import {axiosVar} from "../utils/axiosVar";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -69,7 +70,7 @@ export default function SignUp() {
                 onSubmit={(values,...other)=>{
                 if(values){
                    console.log(values)
-                    axios.post(`https://cool-notes.vercel.app/api/auth/signup`,{
+                    axios.post(`${axiosVar}api/auth/signup`,{
                             email:values.email,
                             password:values.password,
                             firstName:values.firstName,

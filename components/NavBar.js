@@ -25,12 +25,13 @@ import NoteIcon from '@material-ui/icons/Note';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import Brightness2Icon from '@material-ui/icons/Brightness2';
+import {axiosVar} from "../utils/axiosVar";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex'
+        display: 'flex',
     },
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
@@ -64,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
         ...theme.mixins.toolbar,
         justifyContent: 'flex-end',
     },
@@ -86,7 +86,8 @@ const useStyles = makeStyles((theme) => ({
     },
     header:{
         flexGrow:1,
-        textAlign:"center"
+        textAlign:"center",
+
     },
     modeIcon:{
         transition:theme.transitions.create(['translate','transform'],{
@@ -94,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp
         }),
         "&:active":{
-            transform: "scaleX(-1)"
+            transform: "scaleX(-1)",
         }
     }
 }));
@@ -121,7 +122,7 @@ export default function NavBar(props) {
     };
 
     const updateMode = ()=>{
-        axios.post('https://cool-notes.vercel.app/api/user',{
+        axios.post(`${axiosVar}api/user`,{
             email:state.email,
             mode:state.darkMode
         }).then(data=>{
@@ -136,7 +137,7 @@ export default function NavBar(props) {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const logOut =  ()=>{
-         axios.get('https://cool-notes.vercel.app/api/logout').then(data=>{
+         axios.get(`${axiosVar}api/logout`).then(data=>{
              localStorage.clear()
              enqueueSnackbar(data.data.message,{
                  variant:'error'

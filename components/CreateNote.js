@@ -14,6 +14,7 @@ import {Field, Form, Formik} from "formik";
 import React from "react";
 import axios from "axios";
 import {useSnackbar} from "notistack";
+import {axiosVar} from "../utils/axiosVar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,7 +47,7 @@ export default function NoteField() {
                 validationSchema={CreateNoteSchema}
                 onSubmit={(values,...other)=>{
                     if(values){
-                        axios.post(`https://cool-notes.vercel.app/api/notes/`,{
+                        axios.post(`${axiosVar}api/notes/`,{
                                 title:values.title,
                                 description:values.description,
                                 createdBy:values.createdBy

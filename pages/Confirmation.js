@@ -12,6 +12,7 @@ import {myGet} from "../utils/myGet";
 import parseCookie from "../utils/parseCookie";
 import {decode} from "jsonwebtoken";
 import Button from "@material-ui/core/Button";
+import {axiosVar} from "../utils/axiosVar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -74,7 +75,7 @@ Confirmation.getInitialProps = async ctx =>{
 
 
 
-   const data = await myGet(`https://cool-notes.vercel.app/api/auth/confirmation?email=${cookieEmail}&hash=${hash}`,ctx)
+   const data = await myGet(`${axiosVar}api/auth/confirmation?email=${cookieEmail}&hash=${hash}`,ctx)
 
     return{
         info:data

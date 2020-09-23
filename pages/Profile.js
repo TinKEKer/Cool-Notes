@@ -7,6 +7,7 @@ import ProfileComponent from "../components/ProfileComponent";
 import {Grid} from "@material-ui/core";
 import  axios from "axios";
 import {Skeleton} from "@material-ui/lab";
+import {axiosVar} from "../utils/axiosVar";
 export default function Profile({data}){
 
     const [user,setUser] = useState(data)
@@ -14,7 +15,7 @@ export default function Profile({data}){
     const [state,dispatch] = useContext(Context)
 
     useEffect(()=>{
-        axios.get(`https://cool-notes.vercel.app/api/user?email=${localStorage.getItem('email')}`).then(data=>{
+        axios.get(`${axiosVar}api/user?email=${localStorage.getItem('email')}`).then(data=>{
             setUser(data.data)
         })
     },[state.darkMode])
@@ -34,7 +35,7 @@ Profile.getInitialProps = async (ctx) => {
     ctx.query={
         email: cookieEmail===''?localStorage.getItem('email'):cookieEmail
     }
-    const json = await myGet(`https://cool-notes.vercel.app/api/user?email=${ctx.query.email}`,ctx);
+    const json = await myGet(`${axiosVar}api/user?email=${ctx.query.email}`,ctx);
 
     return{
         data:json

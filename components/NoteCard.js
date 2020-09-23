@@ -16,16 +16,18 @@ import  axios from "axios";
 import {useEffect, useState} from "react";
 import EditIcon from '@material-ui/icons/Edit';
 import FormDialog from "./UpdateNote";
+import {Grid} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width:'100%',
+        borderRadius:'0px',
         margin:'15px 0px 0px 0px',
         height:'100%',
         boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
         "&:hover": {
             boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
         }
+
     },
     avatar: {
         backgroundColor: red[500],
@@ -38,10 +40,10 @@ const useStyles = makeStyles((theme) => ({
         }),
         "&:active":{
             transform: "scale(1.3)"
-        }
+        },
     },
     buttonLiked:{
-        color:"#c90042",
+      color:'#F32E3D'
     },
     editButton:{
         marginLeft:'auto'
@@ -57,8 +59,7 @@ export default function NoteCard({data,open,setOpen,setEdit,setLiked}) {
 
 
     return (
-        <>
-        <Card className={classes.root} variant={"outlined"}>
+        <Card className={classes.root} raised={true} >
         <CardContent >
             <CardHeader
                 title={note.title}
@@ -84,6 +85,5 @@ export default function NoteCard({data,open,setOpen,setEdit,setLiked}) {
             </CardActions>
         </CardContent>
         </Card>
-            </>
     );
 }

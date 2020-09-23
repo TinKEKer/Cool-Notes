@@ -1,0 +1,1 @@
+export const axiosVar = process.env.NODE_ENV!=='development'?'https://cool-notes.vercel.app/':'http://localhost:3000/'

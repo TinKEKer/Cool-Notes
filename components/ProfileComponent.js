@@ -16,6 +16,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 1000,
+        transition: 'background-color 0.2s ease-out',
     },
     avatar: {
         backgroundColor: red[500],
@@ -29,12 +30,12 @@ export default function ProfileComponent({data}) {
 console.log(data)
 
 
-   const latestPost =  data.notes.reduce((a, b) => {
+   const latestPost = data.notes.length!==0?data.notes.reduce((a, b) => {
         return new Date(a.createdAt) > new Date(b.createdAt) ? a : b;
-    })
+    }):false
 
 
-    const wasUpdated = new Date(latestPost.createdAt).getTime()=== new Date(latestPost.updatedAt).getTime()?false:true;
+    const wasUpdated = !latestPost?null:new Date(latestPost.createdAt).getTime()=== new Date(latestPost.updatedAt).getTime()?false:true;
 
     return (
         <Card className={classes.root}>
@@ -64,12 +65,13 @@ console.log(data)
                                 <TableCell>{String(data.user.Darkmode)}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>Notes Number</TableCell>
-                                <TableCell>{data.notes.length}</TableCell>
-                            </TableRow>
-                            <TableRow>
                                 <TableCell>Verified</TableCell>
                                 <TableCell>{data.user.isVerified?<DoneIcon/>:<ClearIcon/>}</TableCell>
+                            </TableRow>
+                            {data.notes.length!==0?<>
+                            <TableRow>
+                                <TableCell>Notes Number</TableCell>
+                                <TableCell>{data.notes.length}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Latest Post Title</TableCell>
@@ -83,6 +85,7 @@ console.log(data)
                                 <TableCell>Latest Post Updated</TableCell>
                                 <TableCell>{wasUpdated?`Was Updated (${Date(latestPost.updatedAt)}`:"Wasn't updated"}</TableCell>
                             </TableRow>
+                              </>  :null}
                         </TableBody>
                     </Table>
                 </TableContainer>

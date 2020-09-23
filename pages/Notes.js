@@ -11,11 +11,33 @@ import {useSnackbar} from "notistack";
 import {Skeleton} from "@material-ui/lab";
 import FormDialog from "../components/UpdateNote";
 import {useRouter} from "next/router";
-import ReactDOM from 'react'
+import {axiosVar} from "../utils/axiosVar";
+import {Grid} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import {red} from "@material-ui/core/colors";
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        overflow:'hidden',
+
+    },
+    helper:{
+        minWidth:'60%',
+        maxWidth:'100%',
+        overflow:'hidden',
+        marginBottom:'-5px'
+    }
+}));
+
+
+
 
 
 export  default  function Notes ({notes}){
    const [state,dispatch] = useContext(Context)
+
+    const classes = useStyles()
 
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -28,7 +50,7 @@ export  default  function Notes ({notes}){
     useEffect(() => {
         async function fetchData() {
             const email = state.email!==undefined&&state.email!==''?state.email:localStorage.getItem('email')
-        axios.get(`https://cool-notes.vercel.app/api/notes?email=${email}`).then(data=>{
+        axios.get(`${axiosVar}api/notes?email=${email}`).then(data=>{
             setNote(data.data.data)
             router.events.on('routeChangeStart', ()=>setUpdate(true))
             return ()=>{
@@ -99,12 +121,12 @@ const setToUpdate = (data,oldData)=>{
 
 
         const updateBeforeUnload =  ()=>{
-            axios.put('https://cool-notes.vercel.app/api/notes',note)
+            axios.put(`${axiosVar}api/notes`,note)
         }
 
 
    const handleDelete = itemToDelete => {
-       axios.delete(`https://cool-notes.vercel.app/api/notes/${itemToDelete._id}`
+       axios.delete(`${axiosVar}api/notes/${itemToDelete._id}`
        ).then(data=>{
            enqueueSnackbar('Note Deleted',{
                variant:'error'
@@ -118,18 +140,29 @@ const setToUpdate = (data,oldData)=>{
     const [edit,setEdit] = useState(undefined)
 
     const SortableItem = sortableElement(({value}) =>
-        <div>
-        <SwipeToDelete onDelete={()=>handleDelete(value)}  height={210} deleteWidth={75}>
+
+           <Grid item xs={12} className={classes.helper}>
+            <SwipeToDelete onDelete={()=>handleDelete(value)}  height={250}  deleteWidth={75} >
         <NoteCard data={value} open={open} setOpen={setOpen} setEdit={setEdit} setLiked={setLiked} updateNote={setNote}/>
         </SwipeToDelete>
-        </div>
+           </Grid>
+
     )
     const SortableList = SortableContainer(({items}) => {
         return (
             <ul>
+                <Grid
+                    container
+                    spacing={6}
+                    direction={"column"}
+                    alignItems={"center"}
+                    justify={"center"}
+                       className={classes.root}
+                >
                 {items.map((value, index) => (
                     <SortableItem value={value} key={value._id} index={index}  key={value._id} id={'item'} />
                 ))}
+                </Grid>
             </ul>
         );
     });
@@ -156,7 +189,7 @@ Notes.getInitialProps = async (ctx) => {
         email: cookieEmail===''?ctx.query.email:cookieEmail
     }
 
-const json = await myGet(`https://cool-notes.vercel.app/api/notes?email=${ctx.query.email}`,ctx);
+const json = await myGet(`${axiosVar}api/notes?email=${ctx.query.email}`,ctx);
 
   console.log(json)
 return{

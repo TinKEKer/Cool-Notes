@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useMemo, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import {createMuiTheme, makeStyles, ThemeProvider} from '@material-ui/core/styles';
@@ -6,8 +6,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import NavBar from "../components/NavBar";
 import {reducer, initialState, Context} from '../utils/reducer/reducer'
 import {SnackbarProvider} from "notistack";
-import {blue,deepPurple} from "@material-ui/core/colors";
+import {blue, deepPurple, red} from "@material-ui/core/colors";
 import NextNProgress from "nextjs-progressbar";
+
 
 
 export default function MyApp(props) {
@@ -26,7 +27,10 @@ export default function MyApp(props) {
     const palletType = state.darkMode?'dark':'light'
     const mainPrimaryColor = state.darkMode?deepPurple[300]:blue[900];
     const mainSecondaryColor = state.darkMode?deepPurple[200]:blue[500];
-    const Darktheme = createMuiTheme({
+
+
+    const Darktheme = useMemo(
+        ()=> createMuiTheme({
         palette: {
             type:palletType,
             primary: {
@@ -39,11 +43,44 @@ export default function MyApp(props) {
             tonalOffset: 0.4,
         },
 
-    })
+            overrides: {
+                MuiInputBase: {
+                    root: {
+                        "& input": {
+                            "&:-webkit-autofill": {
+                                transition:
+                                    "background-color 50000s ease-in-out 0s, color 50000s ease-in-out 0s",
+                            },
+                            "&:-webkit-autofill:focus": {
+                                transition:
+                                    "background-color 50000s ease-in-out 0s, color 50000s ease-in-out 0s",
+                            },
+                            "&:-webkit-autofill:hover": {
+                                transition:
+                                    "background-color 50000s ease-in-out 0s, color 50000s ease-in-out 0s",
+                            },
+                        },
+                    },
+                },
+                MuiCssBaseline: {
+                    '@global': {
+                        body: {
+                            transition: 'background-color 0.4s ease-out',
+                        },
+                    },
+                },
+            },
+
+    }),[state.darkMode]
+    )
+
+
+
+
 
 
     return (
-        <React.Fragment>
+        <>
             <ThemeProvider theme={Darktheme}>
             <NextNProgress
                 color="#32a862"
@@ -68,7 +105,7 @@ export default function MyApp(props) {
                 </SnackbarProvider>
             </Context.Provider>
             </ThemeProvider>
-        </React.Fragment>
+            </>
     );
 }
 

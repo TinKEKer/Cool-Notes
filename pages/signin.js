@@ -18,6 +18,7 @@ import  axios from 'axios'
 import {useRouter} from "next/router";
 import {Context} from "../utils/reducer/reducer";
 import { useSnackbar } from 'notistack';
+import {axiosVar} from "../utils/axiosVar";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -76,7 +77,7 @@ export default function SignIn() {
                         validationSchema={SignInSchema}
                         onSubmit={(values,...other)=>{
                             if(values){
-                                axios.post(`https://cool-notes.vercel.app/api/login/`,{
+                                axios.post(`${axiosVar}api/login/`,{
                                     email:values.email,
                                     password:values.password
                                     },
