@@ -88,7 +88,7 @@ export default function NoteField() {
     };
 
     const isLastStep = () => {
-        return activeStep === steps.length - 1;
+        return activeStep === steps.length ;
     };
 
 
@@ -101,7 +101,7 @@ export default function NoteField() {
                 validationSchema={CreateNoteSchema}
                 onSubmit={(values,...other)=>{
                     if(values){
-                        if (!isLastStep()) {
+                        if (isLastStep()) {
                             console.log(values)
 
                             axios.post(`${axiosVar}api/notes/`,{
@@ -139,7 +139,8 @@ export default function NoteField() {
                 }}
         >
             {({errors,touched,isValid,dirty,values})=> {
-
+                   const errList = ['title','description']
+                const selector = errList[activeStep]
                 return <Form className={classes.root}>
                     <Stepper activeStep={activeStep} orientation="vertical">
                         {steps.map((label, index) => (
@@ -161,7 +162,7 @@ export default function NoteField() {
                                                 color="primary"
                                                 onClick={handleNext}
                                                 className={classes.button}
-                                                disabled={isLastStep()?!isValid:false}
+                                                disabled={!(dirty&&errors[selector]==undefined)}
                                                 type="submit"
 
 

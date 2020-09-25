@@ -8,7 +8,7 @@ import {reducer, initialState, Context} from '../utils/reducer/reducer'
 import {SnackbarProvider} from "notistack";
 import {blue, deepPurple, red} from "@material-ui/core/colors";
 import NextNProgress from "nextjs-progressbar";
-
+import 'react-calendar-heatmap/dist/styles.css';
 
 
 export default function MyApp(props) {

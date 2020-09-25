@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         borderRadius:'0px',
         width:'100%',
-        minHeight:'100%',
+        minWidth: 270,
         margin:'15px 0px 0px 0px',
         boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
         "&:hover": {
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
     button:{
       marginRight:'auto',
-        transition:theme.transitions.create(['color','transform'],{
+        transition:theme.transitions.create('transform',{
             duration:theme.transitions.duration.complex,
             easing: theme.transitions.easing.easeInOut
         }),
@@ -63,9 +63,9 @@ export default function NoteCard({data,open,setOpen,setEdit,setLiked}) {
         <Card className={classes.root} raised={true} variant={"outlined"} >
         <CardContent>
             <CardHeader
-                title={<Typography variant={"h5"} component={"h5"} className={classes.title}>{note.title}</Typography>}
+                title={note.title}
+                titleTypographyProps={{className:classes.title}}
                 subheader={<Chip variant="outlined" color="primary" icon={<TodayIcon />} label={new Date(note.createdAt).toLocaleDateString("en-Us",{weekday:'long',year:'numeric',month:'long',day:'numeric'})} style={{width:'100%'}} /> }
-                className={classes.cardHeader}
               />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">

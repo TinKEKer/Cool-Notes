@@ -16,6 +16,7 @@ import React from "react";
 import {useSnackbar} from "notistack";
 import {useRouter} from "next/router";
 import {axiosVar} from "../utils/axiosVar";
+import SignIn from "./signin";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -174,4 +175,13 @@ export default function SignUp() {
 
         </Container>
     );
+}
+
+SignUp.getInitialProps = async (ctx)=>{
+    await axios.get(`${axiosVar}api/start`)
+
+    return{
+        data:'Done'
+    }
+
 }

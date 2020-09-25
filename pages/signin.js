@@ -175,3 +175,12 @@ export default function SignIn() {
         </Container>
     )
 }
+
+SignIn.getInitialProps = async (ctx)=>{
+  await axios.get(`${axiosVar}api/start`)
+
+    return{
+       data:'Done'
+    }
+
+}

@@ -12,6 +12,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import DoneIcon from '@material-ui/icons/Done';
 import ClearIcon from '@material-ui/icons/Clear';
+import Grid from "@material-ui/core/Grid";
+import CalendarHeatmap from 'react-calendar-heatmap';
+import Tooltip from "@material-ui/core/Tooltip";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,12 +26,56 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: red[500],
         width: theme.spacing(7),
         height: theme.spacing(7),
-    },
+    }
 }));
 
 export default function ProfileComponent({data}) {
     const classes = useStyles();
+
+    const config = {
+        theme: 'blue',
+        width: 40,
+        height: 10,
+        boxSize: 20,
+        isLineChart: false,
+        bordered: false
+    };
+
 console.log(data)
+
+let ChartData=[];
+if(data.notes.length!==0){
+    const tempData = data.notes.slice()
+    for(let i = 0;i<tempData.length;i++) {
+        var tempCreated = new Date(tempData[i].createdAt).toLocaleDateString("en-Us", {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        })
+        let counter = 0;
+        for (let j = 0; j < tempData.length; j++) {
+            if (tempCreated == new Date(tempData[j].createdAt).toLocaleDateString("en-Us", {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            })) {
+                counter++
+                tempData.slice(j, 1);
+            }
+        }
+        ChartData.push({
+            date: tempCreated,
+            count: counter,
+        })
+    }
+ChartData= ChartData.reduce(
+    (accumulator, current) => accumulator.some(x => x.date === current.date)? accumulator: [...accumulator, current ], []
+)
+    console.log(ChartData)
+    }
+
 
 
    const latestPost = data.notes.length!==0?data.notes.reduce((a, b) => {
@@ -38,6 +86,8 @@ console.log(data)
     const wasUpdated = !latestPost?null:new Date(latestPost.createdAt).getTime()=== new Date(latestPost.updatedAt).getTime()?false:true;
 
     return (
+        <Grid>
+            <Grid>
         <Card className={classes.root}>
             <CardHeader
                 avatar={
@@ -89,7 +139,19 @@ console.log(data)
                         </TableBody>
                     </Table>
                 </TableContainer>
+                {data.notes.length!==0&&ChartData!==[]?
+                    // <Chartify data={ChartData} config={config} container="chart-container"  />>
+                    <CalendarHeatmap
+                        showWeekdayLabels={true}
+                        showOutOfRangeDays={true}
+                        onMouseOver={(_,value)=>console.log(value)}
+                        values={ChartData}
+                    />
+
+                    :null}
             </CardContent>
         </Card>
+            </Grid>
+            </Grid>
     );
 }

@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
     helper:{
         height:'100%',
         width:'100%',
-        display: "inline-block"
-
+        display: "inline-flex",
+        justifyContent:'center',
     }
 }));
 
@@ -137,16 +137,18 @@ const setToUpdate = (data,oldData)=>{
     const [edit,setEdit] = useState(undefined)
 
     const SortableItem = sortableElement(({value}) =>
-        <div className={classes.helper}>
-            <SwipeToDelete onDelete={()=>handleDelete(value)}  height={250}  deleteWidth={75} >
+        <Grid container className={classes.helper}>
+            <Grid item xs={10} md={7} lg={6} >
+            <SwipeToDelete onDelete={()=>handleDelete(value)}  height={"100%"}  deleteWidth={75} >
         <NoteCard data={value} open={open} setOpen={setOpen} setEdit={setEdit} setLiked={setLiked} updateNote={setNote}/>
         </SwipeToDelete>
-        </div>
+            </Grid>
+        </Grid>
 
     )
     const SortableList = SortableContainer(({items}) => {
         return (
-            <ul>
+            <ul style={{margin:'auto',paddingLeft:'0px'}}>
                 {items.map((value, index) => (
                     <SortableItem value={value} key={value._id} index={index}  key={value._id} id={'item'} />
                 ))}
