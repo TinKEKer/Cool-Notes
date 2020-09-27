@@ -1,7 +1,8 @@
 import {createContext} from "react";
 
 export const initialState = {
-   email:''
+   email:'',
+    type:''
 }
 
 export const Context = createContext(initialState);
@@ -24,6 +25,13 @@ export const reducer = (state,action)=>{
                 ...state,
                 darkMode:!state.darkMode
             }
+        case "Sort Type":
+            return {
+                ...state,
+                type:action.payload
+            }
+
+
         default:return state
     }
 }

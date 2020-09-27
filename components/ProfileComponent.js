@@ -36,14 +36,6 @@ const useStyles = makeStyles((theme) => ({
 export default function ProfileComponent({data}) {
     const classes = useStyles();
 
-    // const config = {
-    //     theme: 'blue',
-    //     width: 40,
-    //     height: 10,
-    //     boxSize: 20,
-    //     isLineChart: false,
-    //     bordered: false
-    // };
 
 console.log(data)
 
