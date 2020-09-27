@@ -142,7 +142,7 @@ export  default  function NotesComponent ({notes,type}){
 
     const SortableItem = sortableElement(({value}) =>
         <Grid container className={classes.helper}>
-            <Grid item xs={10} md={7} lg={6} >
+            <Grid item xs={10} md={7} lg={6} style={{overflow:'hidden'}}>
                 <SwipeToDelete onDelete={()=>handleDelete(value)}  height={"100%"}  deleteWidth={75} >
                     <NoteCard data={value} open={open} setOpen={setOpen} setEdit={setEdit} setLiked={setLiked} updateNote={setNote}/>
                 </SwipeToDelete>

@@ -116,7 +116,7 @@ export default function NoteField() {
                                 }).then(data=>{
 
                                 console.log(data)
-                                enqueueSnackbar(data.statusText,{
+                                enqueueSnackbar("Note Added",{
                                     variant:'success'
                                 })
                                 other[0].resetForm({})
