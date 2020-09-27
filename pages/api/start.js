@@ -1,3 +1,6 @@
+import dbConnect from "../../utils/dbConnect";
+
+dbConnect()
 
 export default async function Start(req,res)
 {
