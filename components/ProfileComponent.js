@@ -13,8 +13,12 @@ import TableRow from '@material-ui/core/TableRow';
 import DoneIcon from '@material-ui/icons/Done';
 import ClearIcon from '@material-ui/icons/Clear';
 import Grid from "@material-ui/core/Grid";
-import CalendarHeatmap from 'react-calendar-heatmap';
 import Tooltip from "@material-ui/core/Tooltip";
+import dynamic from 'next/dynamic';
+import ReactTooltip from "react-tooltip";
+
+ const CalendarHeatmap=dynamic(import('react-calendar-heatmap'),{ssr:false})
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,14 +36,14 @@ const useStyles = makeStyles((theme) => ({
 export default function ProfileComponent({data}) {
     const classes = useStyles();
 
-    const config = {
-        theme: 'blue',
-        width: 40,
-        height: 10,
-        boxSize: 20,
-        isLineChart: false,
-        bordered: false
-    };
+    // const config = {
+    //     theme: 'blue',
+    //     width: 40,
+    //     height: 10,
+    //     boxSize: 20,
+    //     isLineChart: false,
+    //     bordered: false
+    // };
 
 console.log(data)
 
@@ -54,6 +58,7 @@ if(data.notes.length!==0){
             day: 'numeric'
         })
         let counter = 0;
+        var details=[];
         for (let j = 0; j < tempData.length; j++) {
             if (tempCreated == new Date(tempData[j].createdAt).toLocaleDateString("en-Us", {
                 weekday: 'long',
@@ -140,14 +145,26 @@ ChartData= ChartData.reduce(
                     </Table>
                 </TableContainer>
                 {data.notes.length!==0&&ChartData!==[]?
-                    // <Chartify data={ChartData} config={config} container="chart-container"  />>
+                    <div>
                     <CalendarHeatmap
-                        showWeekdayLabels={true}
-                        showOutOfRangeDays={true}
-                        onMouseOver={(_,value)=>console.log(value)}
+                         showWeekdayLabels={true}
                         values={ChartData}
+                         tooltipDataAttrs={value =>
+                             value.count!==null&&value.date!==null?{
+                                 'data-tip': `${value.date} , ${
+                                     value.count
+                                 } Notes were created`,
+                             }:null
+                         }
+                         classForValue={value => {
+                             if (!value) {
+                                 return 'color-empty';
+                             }
+                             return `color-gitlab-${Math.ceil((value.count/100)*10)}`;
+                         }}
                     />
-
+                        <ReactTooltip  />
+                                         </div>
                     :null}
             </CardContent>
         </Card>

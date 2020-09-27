@@ -15,6 +15,7 @@ import {axiosVar} from "../utils/axiosVar";
 import {Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {red} from "@material-ui/core/colors";
+import NoteCardSkeleton from "../components/NoteCardSkeleton";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -159,8 +160,24 @@ const setToUpdate = (data,oldData)=>{
     return(
         <>
             {note!==undefined?
-             <SortableList items={note} onSortEnd={onSortEnd} pressDelay={300} lockAxis="y" transitionDuration={500} useWindowAsScrollContainer={true} />
-                :<Skeleton height={280}/>}
+                <SortableList items={note} onSortEnd={onSortEnd} pressDelay={300} lockAxis="y" transitionDuration={500} useWindowAsScrollContainer={true} />
+                :
+            <Grid container
+                  spacing={4}
+                  direction="column"
+                  alignItems={"center"}
+                 >
+                <Grid  item xs={12}  style={{width:'50%'}}  >
+                <NoteCardSkeleton/>
+                </Grid>
+                <Grid  item xs={12}  style={{width:'50%'}}  >
+                <NoteCardSkeleton/>
+                </Grid>
+                    <Grid  item xs={12}  style={{width:'50%'}}  >
+                <NoteCardSkeleton/>
+                    </Grid>
+            </Grid>}
+
             {edit!==undefined?<FormDialog open={open} close={() => {
                 setOpen(false)
             }} data={edit} setToUpdate={setToUpdate} />:null}
