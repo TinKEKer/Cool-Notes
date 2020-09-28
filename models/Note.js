@@ -15,12 +15,12 @@ const NoteSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true, 'Please add a title'],
-        unique: true,
         trim: true,
         maxlength: [40, 'Title cannot be more than 40 char']
     },
     description:{
         type:String,
+        trim: true,
         required:true,
         maxlength:[200,'Desc cannot be more than 200 char']
     },
@@ -39,8 +39,7 @@ NoteSchema.plugin(autoIncrement.plugin,{
     model:"Note",
     field:"noteId",
     startAt:1,
-    incrementBy: 1,
-    type:Number
+    incrementBy: 1
 })
 
 module.exports = mongoose.models.Note || mongoose.model('Note',NoteSchema);

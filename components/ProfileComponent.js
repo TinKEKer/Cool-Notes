@@ -13,11 +13,10 @@ import TableRow from '@material-ui/core/TableRow';
 import DoneIcon from '@material-ui/icons/Done';
 import ClearIcon from '@material-ui/icons/Clear';
 import Grid from "@material-ui/core/Grid";
-import Tooltip from "@material-ui/core/Tooltip";
 import dynamic from 'next/dynamic';
 import ReactTooltip from "react-tooltip";
 
- const CalendarHeatmap=dynamic(import('react-calendar-heatmap'),{ssr:false})
+const CalendarHeatmap=dynamic(import('react-calendar-heatmap'),{ssr:true})
 
 
 
@@ -155,7 +154,7 @@ ChartData= ChartData.reduce(
                              return `color-gitlab-${Math.ceil((value.count/100)*10)}`;
                          }}
                     />
-                        <ReactTooltip  />
+                        <ReactTooltip type="dark"  uuid="mytt" />
                                          </div>
                     :null}
             </CardContent>

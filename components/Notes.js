@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export  default  function NotesComponent ({notes,type}){
+
     const [state,dispatch] = useContext(Context)
 
     const classes = useStyles()
@@ -56,12 +57,12 @@ export  default  function NotesComponent ({notes,type}){
             });
         }
         if(notes.data.length===0){
-            fetchData();
+            fetchData()
         }else {
             setNote(notes.data)
         }
 
-    }, []);
+    }, [notes]);
 
     useEffect(()=>{
         const sorted=notes.length!==0?sortedArr(notes.data,type[0],type[1]!==undefined?type[1]:''):null

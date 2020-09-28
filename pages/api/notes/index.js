@@ -37,7 +37,7 @@ export default auth(async function Notes(req,res){
             try{
                   console.log(req.body)
                 for await (let item of req.body){
-                    let a = await Note.findOneAndUpdate({noteId:item.noteId},{
+                    let a = await Note.findOneAndUpdate({noteId:item.noteId,createdBy:item.createdBy},{
                         liked: item.liked,
                         title:item.title,
                         description:item.description,

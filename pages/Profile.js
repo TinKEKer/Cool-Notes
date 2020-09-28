@@ -6,7 +6,6 @@ import {myGet} from "../utils/myGet";
 import ProfileComponent from "../components/ProfileComponent";
 import {Grid} from "@material-ui/core";
 import  axios from "axios";
-import {Skeleton} from "@material-ui/lab";
 import {axiosVar} from "../utils/axiosVar";
 export default function Profile({data}){
 

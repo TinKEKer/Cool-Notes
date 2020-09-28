@@ -10,7 +10,6 @@ import {blue, deepPurple, red} from "@material-ui/core/colors";
 import NextNProgress from "nextjs-progressbar";
 import '../components/react-calendar-chart.css'
 
-
 export default function MyApp(props) {
     const { Component, pageProps } = props;
 
