@@ -8,6 +8,8 @@ import {sortedArr} from "../utils/sortArr";
 import {useContext, useEffect, useState} from "react";
 import {Context} from "../utils/reducer/reducer";
 import axios from "axios";
+import {Grid} from "@material-ui/core";
+import NoteCardSkeleton from "../components/NoteCardSkeleton";
 
 export default function Notes({notes}){
 
@@ -28,7 +30,24 @@ export default function Notes({notes}){
 
     return(
         <BottomNav>
+            {note.data.length!==0&&note.data!==undefined?
             <NotesComponent notes={note} type={type}/>
+            :
+            <Grid container
+                  spacing={4}
+                  direction="column"
+                  alignItems={"center"}
+            >
+                <Grid  item xs={12}  style={{width:'25%'}}  >
+                    <NoteCardSkeleton/>
+                </Grid>
+                <Grid  item xs={12}  style={{width:'25%'}}  >
+                    <NoteCardSkeleton/>
+                </Grid>
+                <Grid  item xs={12}  style={{width:'25%'}}  >
+                    <NoteCardSkeleton/>
+                </Grid>
+            </Grid>}
         </BottomNav>
     )
 }

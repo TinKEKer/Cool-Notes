@@ -166,21 +166,7 @@ export  default  function NotesComponent ({notes,type}){
             {note!==undefined?
                 <SortableList items={note} onSortEnd={onSortEnd} pressDelay={300} lockAxis="y" transitionDuration={500} useWindowAsScrollContainer={true} />
                 :
-                <Grid container
-                      spacing={4}
-                      direction="column"
-                      alignItems={"center"}
-                >
-                    <Grid  item xs={12}  style={{width:'50%'}}  >
-                        <NoteCardSkeleton/>
-                    </Grid>
-                    <Grid  item xs={12}  style={{width:'50%'}}  >
-                        <NoteCardSkeleton/>
-                    </Grid>
-                    <Grid  item xs={12}  style={{width:'50%'}}  >
-                        <NoteCardSkeleton/>
-                    </Grid>
-                </Grid>}
+                null}
             {edit!==undefined?<FormDialog open={open} close={() => {
                 setOpen(false)
             }} data={edit} setToUpdate={setToUpdate} />:null}
